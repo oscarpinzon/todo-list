@@ -1,3 +1,8 @@
+//Font-awesome class name constants
+const CHECK = "fa-check-circle";
+const UNCHECK = "fa-circle";
+const LINE_THROUGH = "lineThrough";
+
 const renderToDoBaseHTML = () => {
   const options = { weekday: "long", month: "short", day: "numeric" };
   const today = new Date();
@@ -44,4 +49,14 @@ const renderToDo = (toDoText, id, done) => {
   document.getElementById("list").insertAdjacentHTML(position, element);
 };
 
-export { renderToDoBaseHTML, renderToDo };
+const toggleCompleted = element => {
+  element.classList.toggle(CHECK);
+  element.classList.toggle(UNCHECK);
+  element.parentNode.querySelector(".text").classList.toggle(LINE_THROUGH);
+};
+
+const removeToDoTrashIcon = (element) => {
+    element.parentNode.parentNode.removeChild(element.parentNode);
+}
+
+export { renderToDoBaseHTML, renderToDo, toggleCompleted, removeToDoTrashIcon };

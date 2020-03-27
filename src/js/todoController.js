@@ -1,4 +1,4 @@
-import { renderToDo, renderToDoBaseHTML } from "./todoInterface";
+import { renderToDoBaseHTML, renderToDo, toggleCompleted, removeToDoTrashIcon } from "./todoInterface";
 import {
   getLocalStorageData,
   setLocalStorageData
@@ -7,11 +7,6 @@ import {
 //App state variables
 let LIST = [];
 let id = 0;
-
-//Font-awesome class name constants
-const CHECK = "fa-check-circle";
-const UNCHECK = "fa-circle";
-const LINE_THROUGH = "lineThrough";
 
 const loadToDoList = array => {
   array.forEach(toDo => {
@@ -50,16 +45,13 @@ const bindEventListeners = () => {
 
   //complete to do
   function completeToDo(element) {
-    element.classList.toggle(CHECK);
-    element.classList.toggle(UNCHECK);
-    element.parentNode.querySelector(".text").classList.toggle(LINE_THROUGH);
-
+    toggleCompleted(element);
     LIST[element.id].done = LIST[element.id].done ? false : true;
   }
 
   //remove to do
   function removeToDo(element) {
-    element.parentNode.parentNode.removeChild(element.parentNode);
+    removeToDoTrashIcon(element)
     LIST[element.id].trash = true;
   }
 
@@ -80,10 +72,11 @@ const bindEventListeners = () => {
 
 const initializeApp = () => {
   renderToDoBaseHTML();
+
   //get data from localStorage
   let data = getLocalStorageData();
 
-  //check if data is not empty
+  //Checks if data should be used
   if (data) {
     LIST = JSON.parse(data);
     id = LIST.length;
@@ -92,15 +85,8 @@ const initializeApp = () => {
     LIST = [];
     id = 0;
   }
+
   bindEventListeners();
 };
 
-const getList = () => {
-  return LIST;
-};
-
-const getId = () => {
-  return id;
-};
-
-export { initializeApp, addToDo, getList, getId };
+export { initializeApp };
