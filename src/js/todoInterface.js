@@ -1,5 +1,3 @@
-import { addToDo } from "./todoController";
-import { setLocalStorageData } from "./localStorageController";
 const renderToDoBaseHTML = () => {
   const options = { weekday: "long", month: "short", day: "numeric" };
   const today = new Date();
@@ -25,29 +23,6 @@ const renderToDoBaseHTML = () => {
   document.body.insertAdjacentHTML(position, baseHTML);
 };
 
-const bindEventListeners = (id, LIST) => {
-  document.addEventListener("keyup", event => {
-    if (event.keyCode === 13) {
-      const toDo = input.value;
-      if (toDo) {
-        addToDo(toDo, id, false, false);
-
-        LIST.push({
-          name: toDo,
-          id: id,
-          done: false,
-          trash: false
-        });
-
-        setLocalStorageData(LIST);
-
-        id++;
-      }
-      document.getElementById("list").value = "";
-    }
-  });
-};
-
 const renderToDo = (toDoText, id, done) => {
   //Font-awesome class name constants
   const CHECK = "fa-check-circle";
@@ -69,4 +44,4 @@ const renderToDo = (toDoText, id, done) => {
   document.getElementById("list").insertAdjacentHTML(position, element);
 };
 
-export { renderToDoBaseHTML, renderToDo, bindEventListeners };
+export { renderToDoBaseHTML, renderToDo };
