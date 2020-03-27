@@ -1,5 +1,4 @@
-const renderBaseHTML = () => {
-  // Show date
+const renderToDoBaseHTML = () => {
   const options = { weekday: "long", month: "short", day: "numeric" };
   const today = new Date();
   const todayString = today.toLocaleDateString("en-US", options);
@@ -24,4 +23,4 @@ const renderBaseHTML = () => {
   document.body.insertAdjacentHTML(position, baseHTML);
 };
 
-export { renderBaseHTML };
+export { renderToDoBaseHTML };

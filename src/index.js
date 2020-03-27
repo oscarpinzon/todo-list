@@ -1,16 +1,20 @@
 import "./css/style.css";
 import "./css/fontawesome/fontawesome.css";
-import "./js/todoInterface.js"
-import { renderBaseHTML } from "./js/todoInterface.js";
+import "./js/todoInterface.js";
+import { renderToDoBaseHTML } from "./js/todoInterface.js";
+import {
+  getLocalStorageData,
+  setLocalStorageData
+} from "./js/localStorageController.js";
 
-renderBaseHTML();
+renderToDoBaseHTML();
 
-//Select the elements
+//Element selectors
 const dateElement = document.getElementById("date");
 const list = document.getElementById("list");
 const input = document.getElementById("input");
 
-//Classes name
+//Font-awesome class names
 const CHECK = "fa-check-circle";
 const UNCHECK = "fa-circle";
 const LINE_THROUGH = "lineThrough";
@@ -20,7 +24,7 @@ let LIST = [],
   id = 0;
 
 //get item from localstorage
-let data = localStorage.getItem("TODO");
+let data = getLocalStorageData();
 
 //check if data is not empty
 if (data) {
@@ -38,12 +42,6 @@ function loadList(array) {
     addToDo(item.name, item.id, item.done, item.trash);
   });
 }
-
-// Show date
-const options = { weekday: "long", month: "short", day: "numeric" };
-const today = new Date();
-
-dateElement.innerHTML = today.toLocaleDateString("en-US", options);
 
 //add a To do
 
@@ -81,7 +79,7 @@ document.addEventListener("keyup", function(event) {
         trash: false
       });
 
-      localStorage.setItem("TODO", JSON.stringify(LIST));
+      setLocalStorageData(LIST);
 
       id++;
     }
@@ -117,5 +115,5 @@ list.addEventListener("click", function(event) {
     removeToDo(element);
   }
 
-  localStorage.setItem("TODO", JSON.stringify(LIST));
+  setLocalStorageData(LIST);
 });
