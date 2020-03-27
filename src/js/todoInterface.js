@@ -23,4 +23,25 @@ const renderToDoBaseHTML = () => {
   document.body.insertAdjacentHTML(position, baseHTML);
 };
 
-export { renderToDoBaseHTML };
+const renderToDo = (toDoText, id, done) => {
+  //Font-awesome class name constants
+  const CHECK = "fa-check-circle";
+  const UNCHECK = "fa-circle";
+  const LINE_THROUGH = "lineThrough";
+
+  const DONE = done ? CHECK : UNCHECK;
+  const LINE = done ? LINE_THROUGH : "";
+
+  const element = `
+    <li class="item">
+    <i class = "far ${DONE} co" job="complete" id="${id}"></i>
+    <p class="text ${LINE}" >${toDoText}</p>
+    <i class="fas fa-trash de" job="delete" id="${id}"></i>
+    </li>
+    `;
+
+  const position = "beforeend";
+  document.getElementById("list").insertAdjacentHTML(position, element);
+};
+
+export { renderToDoBaseHTML , renderToDo};
