@@ -1,12 +1,12 @@
 import "./css/style.css";
 import "./css/fontawesome/fontawesome.css";
 import "./js/todoInterface.js";
-import { renderToDoBaseHTML } from "./js/todoInterface.js";
+import { renderToDoBaseHTML, bindEventListeners } from "./js/todoInterface.js";
 import {
   getLocalStorageData,
   setLocalStorageData
 } from "./js/localStorageController.js";
-import { loadToDoList, addToDo} from "./js/todoController.js";
+import { loadToDoList } from "./js/todoController.js";
 
 //Initialize application
 
@@ -15,7 +15,6 @@ renderToDoBaseHTML();
 
 //Element selectors
 const listElement = document.getElementById("list");
-const input = document.getElementById("input");
 
 //Font-awesome class name constants
 const CHECK = "fa-check-circle";
@@ -39,29 +38,7 @@ if (data) {
   id = 0;
 }
 
-//ad an item to the list when enter is pressed
-document.addEventListener("keyup", function(event) {
-  if (event.keyCode === 13) {
-    const toDo = input.value;
-    if (toDo) {
-      addToDo(toDo, id, false, false);
-
-      LIST.push({
-        name: toDo,
-        id: id,
-        done: false,
-        trash: false
-      });
-
-      setLocalStorageData(LIST);
-
-      id++;
-    }
-    input.value = "";
-  }
-});
-
-addToDo("test", 1, false, true);
+bindEventListeners(id, LIST);
 
 //complete to do
 function completeToDo(element) {
