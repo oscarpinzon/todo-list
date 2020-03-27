@@ -1,54 +1,11 @@
 import "./css/style.css";
 import "./css/fontawesome/fontawesome.css";
+import "./js/todoInterface.js"
+import { renderBaseHTML } from "./js/todoInterface.js";
 
-function component() {
-  const container = document.createElement("div");
-  container.classList = "container";
-
-  //Header
-  const header = document.createElement("div");
-  header.classList = "header";
-  const clearDiv = document.createElement("div");
-  clearDiv.classList = "clear";
-  const refreshIcon = document.createElement("i");
-  refreshIcon.classList = "fa fa-refresh";
-  refreshIcon.setAttribute("aria-hidden", "true");
-  clearDiv.appendChild(refreshIcon);
-  header.appendChild(clearDiv);
-  const date = document.createElement("div");
-  date.id = "date";
-  header.appendChild(date);
-  container.appendChild(header);
-
-  //Content
-  const content = document.createElement("div");
-  content.classList = "content";
-  const list = document.createElement("ul");
-  list.id = "list";
-  content.appendChild(list);
-  container.appendChild(content);
-
-  //Add item
-  const addItem = document.createElement("div");
-  addItem.classList = "add-to-do";
-  const addIcon = document.createElement("i");
-  addIcon.classList = "fas fa-plus-circle";
-  addIcon.setAttribute("aria-hidden", "true");
-  addItem.appendChild(addIcon);
-  const addInput = document.createElement("input");
-  addInput.setAttribute("type", "text");
-  addInput.id = "input";
-  addInput.setAttribute("placeholder", "Add a to-do");
-  addItem.appendChild(addInput);
-  container.appendChild(addItem);
-
-  return container;
-}
-
-document.body.appendChild(component());
+renderBaseHTML();
 
 //Select the elements
-const clear = document.querySelector(".clear");
 const dateElement = document.getElementById("date");
 const list = document.getElementById("list");
 const input = document.getElementById("input");
