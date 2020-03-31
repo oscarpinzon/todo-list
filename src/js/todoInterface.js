@@ -28,19 +28,19 @@ const renderToDoBaseHTML = () => {
   document.body.insertAdjacentHTML(position, baseHTML);
 };
 
-const renderToDo = (toDoText, id, done) => {
+const renderToDo = (title, id, completed) => {
   //Font-awesome class name constants
   const CHECK = "fa-check-circle";
   const UNCHECK = "fa-circle";
   const LINE_THROUGH = "lineThrough";
 
-  const DONE = done ? CHECK : UNCHECK;
-  const LINE = done ? LINE_THROUGH : "";
+  const doneIcon = completed ? CHECK : UNCHECK;
+  const lineStyle = completed ? LINE_THROUGH : "";
 
   const element = `
     <li class="item">
-    <i class = "far ${DONE} co" job="complete" id="${id}"></i>
-    <p class="text ${LINE}" >${toDoText}</p>
+    <i class = "far ${doneIcon} co" job="complete" id="${id}"></i>
+    <p class="text ${lineStyle}" >${title}</p>
     <i class="fas fa-trash de" job="delete" id="${id}"></i>
     </li>
     `;
@@ -55,8 +55,8 @@ const toggleCompleted = element => {
   element.parentNode.querySelector(".text").classList.toggle(LINE_THROUGH);
 };
 
-const removeToDoTrashIcon = (element) => {
-    element.parentNode.parentNode.removeChild(element.parentNode);
-}
+const removeToDoFromInterface = element => {
+  element.parentNode.parentNode.removeChild(element.parentNode);
+};
 
-export { renderToDoBaseHTML, renderToDo, toggleCompleted, removeToDoTrashIcon };
+export { renderToDoBaseHTML, renderToDo, toggleCompleted, removeToDoFromInterface };

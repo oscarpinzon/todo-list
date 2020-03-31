@@ -1,91 +1,94 @@
-import { renderToDoBaseHTML, renderToDo, toggleCompleted, removeToDoTrashIcon } from "./todoInterface";
+import {
+  renderToDoBaseHTML,
+  renderToDo,
+  toggleCompleted,
+  removeToDoFromInterface
+} from "./todoInterface";
 import {
   getLocalStorageData,
-  setLocalStorageData
+  saveLocalStorageData
 } from "./localStorageController.js";
 
 //App state variables
-let LIST = [];
+let toDoArray = [];
 let id = 0;
 
-const loadToDoList = array => {
+const toDoFactory = (title, description, dueDate, priority, completed) => {
+  return { id, title, description, dueDate, priority, completed };
+};
+
+const loadToDoListFromLocal = array => {
   array.forEach(toDo => {
-    addToDo(toDo.name, toDo.id, toDo.done, toDo.trash);
+    renderToDo(toDo.title, toDo.id, toDo.completed);
   });
 };
 
-const addToDo = (toDoText, id, done, trash) => {
-  if (trash) {
-    return;
-  }
-  renderToDo(toDoText, id, done);
+const addNewToDo = (title, description, dueDate, priority, completed) => {
+  const newToDo = toDoFactory(title, description, dueDate, priority, completed);
+  toDoArray.push(newToDo);
+  id++;
+  renderToDo(title, id, completed);
 };
 
 const bindEventListeners = () => {
+  //When 'Enter' key is pressed
+  const enterKeyCode = 13;
   document.addEventListener("keyup", event => {
-    if (event.keyCode === 13) {
-      const toDo = input.value;
-      if (toDo) {
-        addToDo(toDo, id, false, false);
-
-        LIST.push({
-          name: toDo,
-          id: id,
-          done: false,
-          trash: false
-        });
-
-        setLocalStorageData(LIST);
-
-        id++;
+    if (event.keyCode === enterKeyCode) {
+      const inputText = input.value;
+      if (inputText) {
+        addNewToDo(inputText, "", new Date(), 1, false);
+        saveLocalStorageData(toDoArray);
       }
       input.value = "";
+    } else {
+      return;
     }
   });
 
-  //complete to do
-  function completeToDo(element) {
+  //Complete Icon is bugged, how to access object with element.id and change the boolean property
+  function completeIconClicked(element) {
     toggleCompleted(element);
-    LIST[element.id].done = LIST[element.id].done ? false : true;
+    toDoArray.forEach(toDo => {
+      if (toDo.id == element.id) {
+        toDo.completed = !toDo.completed;
+      }
+    });
   }
 
-  //remove to do
-  function removeToDo(element) {
-    removeToDoTrashIcon(element)
-    LIST[element.id].trash = true;
+  function deleteIconClicked(element) {
+    removeToDoFromInterface(element);
+    toDoArray = toDoArray.filter(toDo => {
+      return toDo.id != element.id;
+    });
   }
 
   //target the items created dynamically
   document.getElementById("list").addEventListener("click", function(event) {
     const element = event.target;
     const elementJob = element.attributes.job.value;
-
     if (elementJob === "complete") {
-      completeToDo(element);
+      completeIconClicked(element);
     } else if (elementJob === "delete") {
-      removeToDo(element);
+      deleteIconClicked(element);
     }
-
-    setLocalStorageData(LIST);
+    saveLocalStorageData(toDoArray);
   });
 };
 
 const initializeApp = () => {
   renderToDoBaseHTML();
-
   //get data from localStorage
   let data = getLocalStorageData();
-
-  //Checks if data should be used
+  //Loads local storage or initilizes values
   if (data) {
-    LIST = JSON.parse(data);
-    id = LIST.length;
-    loadToDoList(LIST);
+    toDoArray = JSON.parse(data);
+    id = toDoArray.length;
+    loadToDoListFromLocal(toDoArray);
   } else {
-    LIST = [];
+    toDoArray = [];
     id = 0;
   }
-
   bindEventListeners();
 };
 
