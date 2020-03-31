@@ -8,6 +8,7 @@ import {
   getLocalStorageData,
   saveLocalStorageData
 } from "./localStorageController.js";
+import { bindEventListeners } from "./eventListenerController";
 
 //App state variables
 let toDoArray = [];
