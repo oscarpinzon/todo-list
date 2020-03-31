@@ -4,12 +4,13 @@ import {
   saveLocalStorageData
 } from "./localStorageController.js";
 import { bindEventListeners } from "./eventListenerController";
+import { v4 as uuidv4 } from 'uuid';
 
 //App state variables
 let toDoArray = [];
-let id = 0;
 
 const toDoFactory = (title, description, dueDate, priority, completed) => {
+  const id = uuidv4();
   return { id, title, description, dueDate, priority, completed };
 };
 
@@ -22,24 +23,7 @@ const loadToDoListFromLocal = array => {
 const addNewToDo = (title, description, dueDate, priority, completed) => {
   const newToDo = toDoFactory(title, description, dueDate, priority, completed);
   toDoArray.push(newToDo);
-  id++;
-  renderToDo(title, id, completed);
-};
-
-const initializeApp = () => {
-  renderToDoBaseHTML();
-  //get data from localStorage
-  let data = getLocalStorageData();
-  //Loads local storage or initilizes values
-  if (data) {
-    toDoArray = JSON.parse(data);
-    id = toDoArray.length;
-    loadToDoListFromLocal(toDoArray);
-  } else {
-    toDoArray = [];
-    id = 0;
-  }
-  bindEventListeners();
+  renderToDo(newToDo.title, newToDo.id, newToDo.completed);
 };
 
 const toggleCompletedController = id => {
@@ -50,18 +34,38 @@ const toggleCompletedController = id => {
   });
 };
 
-const removeToDoController = id => {
+const deleteToDo = id => {
   toDoArray = toDoArray.filter(toDo => toDo.id != id);
 };
 
-const saveDataController = () => {
+const saveData = () => {
   saveLocalStorageData(toDoArray);
+};
+
+const initializeApp = () => {
+  renderToDoBaseHTML();
+  //get data from localStorage
+  let data = getLocalStorageData();
+  //Loads local storage or initilizes values
+  if (data) {
+    toDoArray = JSON.parse(data);
+    loadToDoListFromLocal(toDoArray);
+  } else {
+    toDoArray = [];
+  }
+  bindEventListeners();
+
+  //Debug
+  function resetLocalData() {
+    localStorage.clear();
+  }
+  //resetLocalData();
 };
 
 export {
   initializeApp,
   addNewToDo,
   toggleCompletedController,
-  removeToDoController,
-  saveDataController
+  deleteToDo,
+  saveData
 };
