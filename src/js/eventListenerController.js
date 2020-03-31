@@ -1,3 +1,14 @@
+import {
+  addNewToDo,
+  toggleCompletedController,
+  removeToDoController,
+  saveDataController
+} from "./todoController";
+import {
+  toggleCompletedInterface,
+  removeToDoFromInterface
+} from "./todoInterface";
+
 const bindEventListeners = () => {
   bindEnterListener();
   bindToDoListListener();
@@ -5,19 +16,13 @@ const bindEventListeners = () => {
 
 const bindToDoListListener = () => {
   function completeIconClicked(element) {
-    toggleCompleted(element);
-    toDoArray.forEach(toDo => {
-      if (toDo.id == element.id) {
-        toDo.completed = !toDo.completed;
-      }
-    });
+    toggleCompletedInterface(element);
+    toggleCompletedController(element.id);
   }
 
   function deleteIconClicked(element) {
     removeToDoFromInterface(element);
-    toDoArray = toDoArray.filter(toDo => {
-      return toDo.id != element.id;
-    });
+    removeToDoController(element.id);
   }
 
   //target the items created dynamically
@@ -29,7 +34,7 @@ const bindToDoListListener = () => {
     } else if (elementJob === "delete") {
       deleteIconClicked(element);
     }
-    saveLocalStorageData(toDoArray);
+    saveDataController();
   });
 };
 
@@ -40,7 +45,7 @@ const bindEnterListener = () => {
       const inputText = input.value;
       if (inputText) {
         addNewToDo(inputText, "", new Date(), 1, false);
-        saveLocalStorageData(toDoArray);
+        saveDataController();
       }
       input.value = "";
     } else {

@@ -49,7 +49,7 @@ const renderToDo = (title, id, completed) => {
   document.getElementById("list").insertAdjacentHTML(position, element);
 };
 
-const toggleCompleted = element => {
+const toggleCompletedInterface = element => {
   element.classList.toggle(CHECK);
   element.classList.toggle(UNCHECK);
   element.parentNode.querySelector(".text").classList.toggle(LINE_THROUGH);
@@ -59,4 +59,4 @@ const removeToDoFromInterface = element => {
   element.parentNode.parentNode.removeChild(element.parentNode);
 };
 
-export { renderToDoBaseHTML, renderToDo, toggleCompleted, removeToDoFromInterface };
+export { renderToDoBaseHTML, renderToDo, toggleCompletedInterface, removeToDoFromInterface };

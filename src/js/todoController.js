@@ -1,9 +1,4 @@
-import {
-  renderToDoBaseHTML,
-  renderToDo,
-  toggleCompleted,
-  removeToDoFromInterface
-} from "./todoInterface";
+import { renderToDoBaseHTML, renderToDo } from "./todoInterface";
 import {
   getLocalStorageData,
   saveLocalStorageData
@@ -31,52 +26,6 @@ const addNewToDo = (title, description, dueDate, priority, completed) => {
   renderToDo(title, id, completed);
 };
 
-const bindEventListeners = () => {
-  //When 'Enter' key is pressed
-  const enterKeyCode = 13;
-  document.addEventListener("keyup", event => {
-    if (event.keyCode === enterKeyCode) {
-      const inputText = input.value;
-      if (inputText) {
-        addNewToDo(inputText, "", new Date(), 1, false);
-        saveLocalStorageData(toDoArray);
-      }
-      input.value = "";
-    } else {
-      return;
-    }
-  });
-
-  //Complete Icon is bugged, how to access object with element.id and change the boolean property
-  function completeIconClicked(element) {
-    toggleCompleted(element);
-    toDoArray.forEach(toDo => {
-      if (toDo.id == element.id) {
-        toDo.completed = !toDo.completed;
-      }
-    });
-  }
-
-  function deleteIconClicked(element) {
-    removeToDoFromInterface(element);
-    toDoArray = toDoArray.filter(toDo => {
-      return toDo.id != element.id;
-    });
-  }
-
-  //target the items created dynamically
-  document.getElementById("list").addEventListener("click", function(event) {
-    const element = event.target;
-    const elementJob = element.attributes.job.value;
-    if (elementJob === "complete") {
-      completeIconClicked(element);
-    } else if (elementJob === "delete") {
-      deleteIconClicked(element);
-    }
-    saveLocalStorageData(toDoArray);
-  });
-};
-
 const initializeApp = () => {
   renderToDoBaseHTML();
   //get data from localStorage
@@ -93,4 +42,26 @@ const initializeApp = () => {
   bindEventListeners();
 };
 
-export { initializeApp };
+const toggleCompletedController = id => {
+  toDoArray.forEach(toDo => {
+    if (toDo.id == id) {
+      toDo.completed = !toDo.completed;
+    }
+  });
+};
+
+const removeToDoController = id => {
+  toDoArray = toDoArray.filter(toDo => toDo.id != id);
+};
+
+const saveDataController = () => {
+  saveLocalStorageData(toDoArray);
+};
+
+export {
+  initializeApp,
+  addNewToDo,
+  toggleCompletedController,
+  removeToDoController,
+  saveDataController
+};
