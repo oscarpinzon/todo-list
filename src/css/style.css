@@ -4,26 +4,24 @@ body {
 }
 /* ------------ header ------------ */
 .header {
-  display: flex;
-  min-height: 10em;
-  padding: 0.6em;
+  min-height: 20vh;
   background-image: url("../img/bg2.jpg");
   background-size: 100% 200%;
   background-repeat: no-repeat;
   border-radius: 15px 15px 0 0;
+  padding: 10px;
 }
 #date {
-  display: inline-block;
-  align-self: flex-end;
   color: #fff;
-  font-size: 2em;
+  font-size: 8vw;
 }
+
 /* ------------ content ------------ */
 .content {
-  height: 24em;
-  max-height: 24em;
   background-color: #fff;
   overflow: auto;
+  max-height: 65vh;
+  min-height: 65vh;
 }
 .content ul {
   padding: 0;
@@ -32,9 +30,10 @@ body {
 .item {
   border-bottom: 1px solid rgba(0, 0, 0, 0.1);
   list-style: none;
+  padding: 5px;
 }
 .item i.co {
-  font-size: 2.25em;
+  font-size: 8vw;
   padding-left: 5px;
 }
 .item i.co:hover {
@@ -44,17 +43,16 @@ body {
   color: #6eb200;
 }
 .item p.text {
-  font-size: 1.75em;
-  background-color: #fff;
-  margin-bottom: 0em;
-  padding-left: 10px;
+  font-size: 6vw;
+  margin-bottom: 0px;
+  padding-left: 15px;
 }
 .lineThrough {
   text-decoration: line-through;
   color: #ccc;
 }
 .item i.de {
-  font-size: 2.25em;
+  font-size: 8vw;
   padding-right: 5px;
 }
 .item i.de:hover {
@@ -65,17 +63,16 @@ body {
 .add-to-do {
   background-color: #fff;
   border-top: 1px solid rgba(0, 0, 0, 0.1);
-  font-size: 1.75em;
-  padding: 0.1em;
+  font-size: 8vw;
 }
 .add-to-do i {
   color: #4162f6;
-  font-size: 1.75em;
+  font-size: 8vw;
 }
 .add-to-do input {
   background-color: transparent;
   border: none;
-  margin-left: 10px;
+  margin-left: 5px;
 }
 .add-to-do input::-webkit-input-placeholder {
   /* Chrome/Opera/Safari */
@@ -92,4 +89,25 @@ body {
 .add-to-do input:-moz-placeholder {
   /* Firefox 18- */
   color: #4162f6;
+}
+/* Media query for font sizes */
+@media (min-width: 1200px) {
+  #date {
+    font-size: 2em;
+  }
+  .add-to-do i {
+    font-size: 1em;
+  }
+  .item i.co {
+    font-size: 3em;
+  }
+  .item p.text {
+    font-size: 2em;
+  }
+  .item i.de {
+    font-size: 3em;
+  }
+  .add-to-do {
+    font-size: 3em;
+  }
 }
