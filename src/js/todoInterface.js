@@ -9,19 +9,18 @@ const renderToDoBaseHTML = () => {
   const todayString = today.toLocaleDateString("en-US", options);
   const baseHTML = `
     <div class="container">
+      <div class="mx-auto todo-container">
         <div class="header">
-            <div class="clear">
-                <i class="fa fa-refresh" aria-hidden="true"></i> 
-            </div>
-            <div id="date">${todayString}</div>
+          <div id="date">${todayString}</div>
         </div>
         <div class="content">
-            <ul id="list"></ul>
+          <ul id="list"></ul>
         </div>
-        <div class="add-to-do">
-            <i class="fas fa-plus-circle" aria-hidden="true"></i>
-            <input type="text" id="input" placeholder="Add a to-do"></input>
+        <div class="add-to-do row no-gutters">
+          <i class="fas fa-plus-circle col-1" aria-hidden="true"></i>
+          <input type="text" class="col-10" id="input" placeholder="Add a to-do"></input>
         </div>
+      </div>
     </div>
     `;
   const position = "afterbegin";
@@ -38,10 +37,10 @@ const renderToDo = (title, id, completed) => {
   const lineStyle = completed ? LINE_THROUGH : "";
 
   const element = `
-    <li class="item">
-    <i class = "far ${doneIcon} co" job="complete" id="${id}"></i>
-    <p class="text ${lineStyle}" >${title}</p>
-    <i class="fas fa-trash de" job="delete" id="${id}"></i>
+    <li class="row no-gutters justify-content-center align-items-center item">
+      <i class = "col-1 far ${doneIcon} co" job="complete" id="${id}"></i>
+      <p class="col-10 text ${lineStyle}" >${title}</p>
+      <i class="col-1 fas fa-trash de text-right" job="delete" id="${id}"></i>
     </li>
     `;
 
@@ -59,4 +58,9 @@ const removeToDoFromInterface = element => {
   element.parentNode.parentNode.removeChild(element.parentNode);
 };
 
-export { renderToDoBaseHTML, renderToDo, toggleCompletedInterface, removeToDoFromInterface };
+export {
+  renderToDoBaseHTML,
+  renderToDo,
+  toggleCompletedInterface,
+  removeToDoFromInterface
+};

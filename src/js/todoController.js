@@ -4,7 +4,7 @@ import {
   saveLocalStorageData
 } from "./localStorageController.js";
 import { bindEventListeners } from "./eventListenerController";
-import { v4 as uuidv4 } from 'uuid';
+import { v4 as uuidv4 } from "uuid";
 
 //App state variables
 let toDoArray = [];
