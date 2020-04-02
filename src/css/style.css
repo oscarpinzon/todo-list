@@ -69,6 +69,12 @@ body {
 .item .trash-icon {
   padding-right: 15px;
 }
+.item .form-container{
+  font-size: 4vw;
+}
+.item .date-input {
+  text-align: center;
+}
 /* ------------ add item ------------ */
 .add-to-do {
   background-color: #fff;
@@ -115,6 +121,9 @@ body {
     font-size: 5em;
   }
   .item p.text {
+    font-size: 3em;
+  }
+  .item .form-container {
     font-size: 3em;
   }
   .add-to-do {

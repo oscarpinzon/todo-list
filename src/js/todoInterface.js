@@ -41,22 +41,45 @@ const renderToDo = (title, id, completed) => {
 
   const element = `
     <li class="row no-gutters justify-content-center align-items-center item">
-      <i class = "col-1 far ${doneIcon} icon done-icon" job="complete" id="${id}"></i>
+      <i class = "col-1 far ${doneIcon} icon done-icon" data-job="complete" id="${id}"></i>
       <p class="col-9 text-break text ${lineStyle}" >${title}</p>
-      <div class="col-1">
-        <button class="my-btn trash-btn">
-          <i class="fas fa-trash icon trash-icon" job="delete" id="${id}"></i>
-        </button>
-      </div>
-      <div class="col-1">
-        <button class="my-btn" data-toggle="collapse" data-target="form-${id} aria-expanded="false" aria-controls="collapseExample">
-          <i class="fas fa-caret-down options-icon" id=${id}></i>
-        </button>
-      </div>
-      <div class="collapse row" id="form-${id}">
-        <div class="card card-body">
-          Testing
-        </div>
+      <i class="col-1 fas fa-trash icon trash-icon" data-job="delete" id="${id}"></i>
+      <button class="col-1 my-btn" type="button" data-toggle="collapse" data-target="#form-${id}" aria-expanded="false" aria-controls="form-${id}">
+        <i class="fas fa-caret-down options-icon"></i>
+      </button>
+      <div class="collapse col-12 form-container" id="form-${id}">
+        <form class="row no-gutters justify-content-center align-items-center">
+          <div class="form-group col-10">
+            <div class="row no-gutters justify-content-center align-items-center">
+              <label for="title-${id}" class="col-2">Title</label>
+              <input type="text" class="form-control col-10" id="title-${id}" aria-describedby="titleHelp" value="${title}"> 
+            </div>
+          </div>
+          <div class="w-100"></div>
+          <div class="form-group col-10">
+            <label for="description-${id}">Description</label>
+            <textarea class="form-control" id="description-${id}" value=" " row="3"></textarea>
+          </div>
+          <div class="w-100"></div>
+          <div class="form-group col-10">
+            <div class="row no-gutters justify-content-center align-items-center">
+              <label for="due-date-${id}" class="col-4">Due date</label>
+              <input class="form-control col-8 date-input" type="date" id="due-date-${id}" name="due-date-${id}">
+            </div>
+          </div>
+          <div class="w-100"></div>
+          <div class="form-group col-10">
+            <div class="row no-gutters justify-content-center align-items-center">
+              <label for="priority-${id}" class="col-4">Priority</label>
+              <select class="form-control col-8" id="priority-${id}">
+                <option>High</option>
+                <option>Normal</option>
+                <option>Low</option>
+              </select>
+            </div>
+          </div>
+          <button type="submit" class="btn btn-primary col-8">Update</button>
+        </form>
       </div>
     </li>
     `;

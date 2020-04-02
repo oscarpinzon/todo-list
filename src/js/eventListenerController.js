@@ -11,10 +11,10 @@ import {
 
 const bindEventListeners = () => {
   bindEnterListener();
-  bindToDoListListener();
+  bindListListener();
 };
 
-const bindToDoListListener = () => {
+const bindListListener = () => {
   function completeIconClicked(element) {
     toggleCompletedInterface(element);
     toggleCompletedController(element.id);
@@ -28,13 +28,16 @@ const bindToDoListListener = () => {
   //target the items created dynamically
   document.getElementById("list").addEventListener("click", function(event) {
     const element = event.target;
-    const elementJob = element.attributes.job.value;
-    if (elementJob === "complete") {
-      completeIconClicked(element);
-    } else if (elementJob === "delete") {
-      deleteIconClicked(element);
+    if (element.hasAttribute("data-job")) {
+      const elementJob = element.dataset.job;
+      if (elementJob === "complete") {
+        completeIconClicked(element);
+      } else if (elementJob === "delete") {
+        deleteIconClicked(element);
+      }
+      saveData();
     }
-    saveData();
+    return;
   });
 };
 
