@@ -41,9 +41,23 @@ const renderToDo = (title, id, completed) => {
 
   const element = `
     <li class="row no-gutters justify-content-center align-items-center item">
-      <i class = "col-1 far ${doneIcon} co" job="complete" id="${id}"></i>
-      <p class="col-10 text-break text ${lineStyle}" >${title}</p>
-      <i class="col-1 fas fa-trash de text-right" job="delete" id="${id}"></i>
+      <i class = "col-1 far ${doneIcon} icon done-icon" job="complete" id="${id}"></i>
+      <p class="col-9 text-break text ${lineStyle}" >${title}</p>
+      <div class="col-1">
+        <button class="my-btn trash-btn">
+          <i class="fas fa-trash icon trash-icon" job="delete" id="${id}"></i>
+        </button>
+      </div>
+      <div class="col-1">
+        <button class="my-btn" data-toggle="collapse" data-target="form-${id} aria-expanded="false" aria-controls="collapseExample">
+          <i class="fas fa-caret-down options-icon" id=${id}></i>
+        </button>
+      </div>
+      <div class="collapse row" id="form-${id}">
+        <div class="card card-body">
+          Testing
+        </div>
+      </div>
     </li>
     `;
 

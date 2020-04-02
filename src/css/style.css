@@ -13,7 +13,7 @@ body {
 }
 #date {
   color: #fff;
-  font-size: 8vw;
+  font-size: 6vw;
 }
 
 /* ------------ content ------------ */
@@ -32,11 +32,10 @@ body {
   list-style: none;
   padding: 5px;
 }
-.item i.co {
-  font-size: 8vw;
-  padding-left: 5px;
+.item i.icon {
+  font-size: 6vw;
 }
-.item i.co:hover {
+.item i.icon:hover {
   cursor: pointer;
 }
 .fa-check-circle {
@@ -51,13 +50,24 @@ body {
   text-decoration: line-through;
   color: #ccc;
 }
-.item i.de {
-  font-size: 8vw;
-  padding-right: 5px;
+.item i.options-icon {
+  font-size: 10vw;
 }
-.item i.de:hover {
+.item i.options-icon:hover {
+  cursor: pointer;
+}
+.item i.trash-icon:hover {
   color: #af0000;
   cursor: pointer;
+}
+.item .my-btn {
+  background: transparent;
+  border: none;
+  padding: 0px;
+
+}
+.item .trash-icon {
+  padding-right: 15px;
 }
 /* ------------ add item ------------ */
 .add-to-do {
@@ -98,13 +108,13 @@ body {
   .add-to-do i {
     font-size: 1em;
   }
-  .item i.co {
+  .item i.icon {
     font-size: 3em;
   }
-  .item p.text {
-    font-size: 2em;
+  .item i.options-icon {
+    font-size: 5em;
   }
-  .item i.de {
+  .item p.text {
     font-size: 3em;
   }
   .add-to-do {
