@@ -3,16 +3,17 @@ import {
   toggleCompletedController,
   deleteToDo,
   saveData,
-  updateToDo
+  updateToDo,
 } from "./todoController";
 import {
   toggleCompletedInterface,
-  removeToDoFromInterface
+  removeToDoFromInterface,
 } from "./todoInterface";
 
 const bindEventListeners = () => {
   bindEnterListener();
   bindListListener();
+  bindIconListener();
 };
 
 const bindListListener = () => {
@@ -31,7 +32,7 @@ const bindListListener = () => {
   }
 
   //target the items created dynamically
-  document.getElementById("list").addEventListener("click", function(event) {
+  document.getElementById("list").addEventListener("click", function (event) {
     const element = event.target;
     if (element.hasAttribute("data-job")) {
       const elementJob = element.dataset.job;
@@ -39,8 +40,8 @@ const bindListListener = () => {
         completeIconClicked(element);
       } else if (elementJob === "delete") {
         deleteIconClicked(element);
-      } else if (elementJob === "update"){
-        updateBtnClicked(element.id)
+      } else if (elementJob === "update") {
+        updateBtnClicked(element.id);
       }
       saveData();
     }
@@ -50,7 +51,7 @@ const bindListListener = () => {
 
 const bindEnterListener = () => {
   const enterKeyCode = 13;
-  document.addEventListener("keyup", event => {
+  document.addEventListener("keyup", (event) => {
     if (event.keyCode === enterKeyCode) {
       const inputText = input.value;
       if (inputText) {
@@ -58,6 +59,20 @@ const bindEnterListener = () => {
         addNewToDo(inputText, "", Date.now(), "normal", false);
         saveData();
       }
+      input.value = "";
+    } else {
+      return;
+    }
+  });
+};
+
+const bindIconListener = () => {
+  document.getElementById("enter-icon").addEventListener("click", () => {
+    const inputText = input.value;
+    if (inputText) {
+      //Adds the new ToDo with a set of default values
+      addNewToDo(inputText, "", Date.now(), "normal", false);
+      saveData();
       input.value = "";
     } else {
       return;

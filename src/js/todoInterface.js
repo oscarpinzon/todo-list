@@ -20,8 +20,8 @@ const renderToDoBaseHTML = () => {
           <ul id="list"></ul>
         </div>
         <div class="add-to-do row no-gutters">
-          <div class="justify-content-center align-items-center">
-            <i class="fas fa-plus-circle col-2" aria-hidden="true"></i>
+          <div class="justify-content-center align-items-center" id="enter-icon">
+            <i class="fas fa-plus-circle col-2" aria-hidden="true" ></i>
           </div>
           <input type="text" class="col-9" id="input" placeholder="Add a To Do"></input>
         </div>
