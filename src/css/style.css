@@ -13,7 +13,7 @@ body {
 }
 #date {
   color: #fff;
-  font-size: 6vw;
+  font-size: 3vw;
 }
 /* ------------ content ------------ */
 .content {
@@ -32,7 +32,7 @@ body {
   padding: 5px;
 }
 .item i.icon {
-  font-size: 6vw;
+  font-size: 4vw;
 }
 .item i.icon:hover {
   cursor: pointer;
@@ -41,16 +41,19 @@ body {
   color: #6eb200;
 }
 .item p.text {
-  font-size: 5vw;
+  font-size: 4vw;
   margin-bottom: 0px;
   padding-left: 15px;
+}
+.item p.due-date {
+  font-size: 2vw;
 }
 .lineThrough {
   text-decoration: line-through;
   color: #ccc;
 }
 .item i.options-icon {
-  font-size: 10vw;
+  font-size: 7vw;
 }
 .item i.options-icon:hover {
   cursor: pointer;
@@ -68,33 +71,36 @@ body {
   padding-right: 15px;
 }
 .item .form-container{
-  font-size: 4vw;
+  font-size: 2vw;
 }
 .item .date-input {
   text-align: center;
 }
 .item .update-btn{
+  font-size: 2vw;
   background-color: #4162f6;
 }
-.item .form-group {
-  margin-bottom: 0px;
+.item .form-control {
+  font-size: 1.5vw;
 }
 /* ------------ add item ------------ */
 .add-to-do {
   background-color: #fff;
   border-top: 1px solid rgba(0, 0, 0, 0.1);
-  font-size: 8vw;
+  font-size: 4vw;
 }
 .add-to-do i {
   color: #4162f6;
-  font-size: 8vw;
+  font-size: 4vw;
 }
 .add-to-do input {
   background-color: transparent;
   border: none;
   margin-left: 5px;
 }
+
 /* Media query for font sizes */
+/*
 @media (min-width: 1200px) {
   #date {
     font-size: 2em;
@@ -118,3 +124,4 @@ body {
     font-size: 3em;
   }
 }
+*/

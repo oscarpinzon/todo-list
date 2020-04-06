@@ -10,9 +10,9 @@ const renderToDoBaseHTML = () => {
   const today = new Date();
   const todayString = today.toLocaleDateString("en-US", options);
   const baseHTML = `
-    <div class="container">
+    <div class="container-fluid">
       <div class = "row no-gutters">
-        <div class="mx-auto col-lg-8">
+        <div class="mx-auto col-lg-6">
         <div class="header d-flex align-items-end">
           <div id="date">${todayString}</div>
         </div>
@@ -21,9 +21,9 @@ const renderToDoBaseHTML = () => {
         </div>
         <div class="add-to-do row no-gutters">
           <div class="justify-content-center align-items-center">
-            <i class="fas fa-plus-circle col-1" aria-hidden="true"></i>
+            <i class="fas fa-plus-circle col-2" aria-hidden="true"></i>
           </div>
-          <input type="text" class="col-9" id="input" placeholder="Add a To Do"></input>
+          <input type="text" class="col-10" id="input" placeholder="Add a To Do"></input>
         </div>
       </div>
     </div>
@@ -42,13 +42,29 @@ const renderToDo = (id, title, description, dueDate, priority, completed) => {
   const lineStyle = completed ? LINE_THROUGH : "";
 
   const daysUntilDue = differenceInDays(new Date(dueDate), Date.now());
+  let daysUntilDueString = "";
+  if (daysUntilDue === 0) {
+    daysUntilDueString = "Due Today" 
+  }
+  else if (daysUntilDue === 1) {
+    daysUntilDueString = "Due Tomorrow"
+  }
+  else if (daysUntilDue === -1) {
+    daysUntilDueString = "Due Yesterday"
+  }
+  else if (daysUntilDue < -1) {
+    daysUntilDueString = `Due ${daysUntilDue} days ago`
+  }
+  else if (daysUntilDue > 1){
+    daysUntilDueString = `Due in ${daysUntilDue} days`
+  }
 
   const element = `
     <li class="row no-gutters justify-content-center align-items-center item">
     
       <i class = "col-1 far ${doneIcon} icon done-icon" data-job="complete" id="${id}"></i>
       <p class="col-6 text-break text ${lineStyle}" >${title}</p>
-      <p class="col-2 text-center text-muted" text-break text >Due in ${daysUntilDue} days</p>
+      <p class="col-2 text-center text-muted due-date">${daysUntilDueString}</p>
       <i class="col-1 fas fa-trash icon trash-icon" data-job="delete" id="${id}"></i>
       <button class="col-1 my-btn" type="button" data-toggle="collapse" data-target="#form-${id}" aria-expanded="false" aria-controls="form-${id}">
         <i class="fas fa-caret-down options-icon"></i>
@@ -95,7 +111,7 @@ const renderToDo = (id, title, description, dueDate, priority, completed) => {
           
           <div class="w-100"></div>
 
-          <button type="button" class="btn btn-primary btn-lg update-btn" data-job="update" id="${id}">Update</button>
+          <button type="button" class="btn btn-primary col-10 update-btn" data-job="update" id="${id}">Update</button>
         </form>
 
       </div>
