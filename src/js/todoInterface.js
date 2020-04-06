@@ -23,7 +23,7 @@ const renderToDoBaseHTML = () => {
           <div class="justify-content-center align-items-center">
             <i class="fas fa-plus-circle col-2" aria-hidden="true"></i>
           </div>
-          <input type="text" class="col-10" id="input" placeholder="Add a To Do"></input>
+          <input type="text" class="col-9" id="input" placeholder="Add a To Do"></input>
         </div>
       </div>
     </div>
