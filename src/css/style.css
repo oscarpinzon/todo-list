@@ -15,7 +15,6 @@ body {
   color: #fff;
   font-size: 6vw;
 }
-
 /* ------------ content ------------ */
 .content {
   background-color: #fff;
@@ -42,7 +41,7 @@ body {
   color: #6eb200;
 }
 .item p.text {
-  font-size: 6vw;
+  font-size: 5vw;
   margin-bottom: 0px;
   padding-left: 15px;
 }
@@ -64,7 +63,6 @@ body {
   background: transparent;
   border: none;
   padding: 0px;
-
 }
 .item .trash-icon {
   padding-right: 15px;
@@ -74,6 +72,12 @@ body {
 }
 .item .date-input {
   text-align: center;
+}
+.item .update-btn{
+  background-color: #4162f6;
+}
+.item .form-group {
+  margin-bottom: 0px;
 }
 /* ------------ add item ------------ */
 .add-to-do {
@@ -90,22 +94,6 @@ body {
   border: none;
   margin-left: 5px;
 }
-.add-to-do input::-webkit-input-placeholder {
-  /* Chrome/Opera/Safari */
-  color: #4162f6;
-}
-.add-to-do input::-moz-placeholder {
-  /* Firefox 19+ */
-  color: #4162f6;
-}
-.add-to-do input:-ms-input-placeholder {
-  /* IE 10+ */
-  color: #4162f6;
-}
-.add-to-do input:-moz-placeholder {
-  /* Firefox 18- */
-  color: #4162f6;
-}
 /* Media query for font sizes */
 @media (min-width: 1200px) {
   #date {
@@ -121,10 +109,10 @@ body {
     font-size: 5em;
   }
   .item p.text {
-    font-size: 3em;
+    font-size: 2em;
   }
   .item .form-container {
-    font-size: 3em;
+    font-size: 2em;
   }
   .add-to-do {
     font-size: 3em;

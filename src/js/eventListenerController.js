@@ -2,7 +2,8 @@ import {
   addNewToDo,
   toggleCompletedController,
   deleteToDo,
-  saveData
+  saveData,
+  updateToDo
 } from "./todoController";
 import {
   toggleCompletedInterface,
@@ -25,6 +26,10 @@ const bindListListener = () => {
     deleteToDo(element.id);
   }
 
+  function updateBtnClicked(id) {
+    updateToDo(id);
+  }
+
   //target the items created dynamically
   document.getElementById("list").addEventListener("click", function(event) {
     const element = event.target;
@@ -34,6 +39,8 @@ const bindListListener = () => {
         completeIconClicked(element);
       } else if (elementJob === "delete") {
         deleteIconClicked(element);
+      } else if (elementJob === "update"){
+        updateBtnClicked(element.id)
       }
       saveData();
     }
@@ -47,7 +54,8 @@ const bindEnterListener = () => {
     if (event.keyCode === enterKeyCode) {
       const inputText = input.value;
       if (inputText) {
-        addNewToDo(inputText, "", new Date(), 1, false);
+        //Adds the new ToDo with a set of default values
+        addNewToDo(inputText, "", Date.now(), "normal", false);
         saveData();
       }
       input.value = "";
