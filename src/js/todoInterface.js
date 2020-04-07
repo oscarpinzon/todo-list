@@ -1,14 +1,13 @@
-import differenceInDays from "date-fns/differenceInDays";
-import { format, parseISO } from "date-fns";
-//Font-awesome class name constants
-const CHECK = "fa-check-circle";
-const UNCHECK = "fa-circle";
-const LINE_THROUGH = "lineThrough";
+import differenceInDays from 'date-fns/differenceInDays'
+// Font-awesome class name constants
+const CHECK = 'fa-check-circle'
+const UNCHECK = 'fa-circle'
+const LINE_THROUGH = 'lineThrough'
 
 const renderToDoBaseHTML = () => {
-  const options = { weekday: "long", month: "short", day: "numeric" };
-  const today = new Date();
-  const todayString = today.toLocaleDateString("en-US", options);
+  const options = { weekday: 'long', month: 'short', day: 'numeric' }
+  const today = new Date()
+  const todayString = today.toLocaleDateString('en-US', options)
   const baseHTML = `
     <div class="container-fluid">
       <div class = "row no-gutters">
@@ -27,35 +26,31 @@ const renderToDoBaseHTML = () => {
         </div>
       </div>
     </div>
-    `;
-  const position = "afterbegin";
-  document.body.insertAdjacentHTML(position, baseHTML);
-};
+    `
+  const position = 'afterbegin'
+  document.body.insertAdjacentHTML(position, baseHTML)
+}
 
 const renderToDo = (id, title, description, dueDate, priority, completed) => {
-  //Font-awesome class name constants
-  const CHECK = "fa-check-circle";
-  const UNCHECK = "fa-circle";
-  const LINE_THROUGH = "lineThrough";
+  // Font-awesome class name constants
+  const CHECK = 'fa-check-circle'
+  const UNCHECK = 'fa-circle'
+  const LINE_THROUGH = 'lineThrough'
 
-  const doneIcon = completed ? CHECK : UNCHECK;
-  const lineStyle = completed ? LINE_THROUGH : "";
+  const doneIcon = completed ? CHECK : UNCHECK
+  const lineStyle = completed ? LINE_THROUGH : ''
 
-  const daysUntilDue = differenceInDays(new Date(dueDate), Date.now());
-  let daysUntilDueString = "";
+  const daysUntilDue = differenceInDays(new Date(dueDate), Date.now())
+  let daysUntilDueString = ''
   if (daysUntilDue === 0) {
-    daysUntilDueString = "Due Today" 
-  }
-  else if (daysUntilDue === 1) {
-    daysUntilDueString = "Due Tomorrow"
-  }
-  else if (daysUntilDue === -1) {
-    daysUntilDueString = "Due Yesterday"
-  }
-  else if (daysUntilDue < -1) {
+    daysUntilDueString = 'Due Today'
+  } else if (daysUntilDue === 1) {
+    daysUntilDueString = 'Due Tomorrow'
+  } else if (daysUntilDue === -1) {
+    daysUntilDueString = 'Due Yesterday'
+  } else if (daysUntilDue < -1) {
     daysUntilDueString = `Due ${daysUntilDue} days ago`
-  }
-  else if (daysUntilDue > 1){
+  } else if (daysUntilDue > 1) {
     daysUntilDueString = `Due in ${daysUntilDue} days`
   }
 
@@ -97,13 +92,13 @@ const renderToDo = (id, title, description, dueDate, priority, completed) => {
               <label for="priority-${id}" class="col-4">Priority</label>
               <select class="form-control col-8" id="priority-${id}">
                 <option value="high" ${
-                  priority === "high" ? "selected" : ""
+                  priority === 'high' ? 'selected' : ''
                 }>High</option>
                 <option value="normal" ${
-                  priority === "normal" ? "selected" : ""
+                  priority === 'normal' ? 'selected' : ''
                 }>Normal</option>
                 <option value="low" ${
-                  priority === "low" ? "selected" : ""
+                  priority === 'low' ? 'selected' : ''
                 }>Low</option>
               </select>
             </div>
@@ -116,24 +111,24 @@ const renderToDo = (id, title, description, dueDate, priority, completed) => {
 
       </div>
     </li>
-    `;
-  const position = "beforeend";
-  document.getElementById("list").insertAdjacentHTML(position, element);
-};
+    `
+  const position = 'beforeend'
+  document.getElementById('list').insertAdjacentHTML(position, element)
+}
 
 const toggleCompletedInterface = element => {
-  element.classList.toggle(CHECK);
-  element.classList.toggle(UNCHECK);
-  element.parentNode.querySelector(".text").classList.toggle(LINE_THROUGH);
-};
+  element.classList.toggle(CHECK)
+  element.classList.toggle(UNCHECK)
+  element.parentNode.querySelector('.text').classList.toggle(LINE_THROUGH)
+}
 
 const removeToDoFromInterface = element => {
-  element.parentNode.parentNode.removeChild(element.parentNode);
-};
+  element.parentNode.parentNode.removeChild(element.parentNode)
+}
 
 export {
   renderToDoBaseHTML,
   renderToDo,
   toggleCompletedInterface,
   removeToDoFromInterface
-};
+}

@@ -3,81 +3,76 @@ import {
   toggleCompletedController,
   deleteToDo,
   saveData,
-  updateToDo,
-} from "./todoController";
+  updateToDo
+} from './todoController'
 import {
   toggleCompletedInterface,
-  removeToDoFromInterface,
-} from "./todoInterface";
+  removeToDoFromInterface
+} from './todoInterface'
 
 const bindEventListeners = () => {
-  bindEnterListener();
-  bindListListener();
-  bindIconListener();
-};
+  bindEnterListener()
+  bindListListener()
+  bindIconListener()
+}
 
 const bindListListener = () => {
-  function completeIconClicked(element) {
-    toggleCompletedInterface(element);
-    toggleCompletedController(element.id);
+  function completeIconClicked (element) {
+    toggleCompletedInterface(element)
+    toggleCompletedController(element.id)
   }
 
-  function deleteIconClicked(element) {
-    removeToDoFromInterface(element);
-    deleteToDo(element.id);
+  function deleteIconClicked (element) {
+    removeToDoFromInterface(element)
+    deleteToDo(element.id)
   }
 
-  function updateBtnClicked(id) {
-    updateToDo(id);
+  function updateBtnClicked (id) {
+    updateToDo(id)
   }
 
-  //target the items created dynamically
-  document.getElementById("list").addEventListener("click", function (event) {
-    const element = event.target;
-    if (element.hasAttribute("data-job")) {
-      const elementJob = element.dataset.job;
-      if (elementJob === "complete") {
-        completeIconClicked(element);
-      } else if (elementJob === "delete") {
-        deleteIconClicked(element);
-      } else if (elementJob === "update") {
-        updateBtnClicked(element.id);
+  // target the items created dynamically
+  document.getElementById('list').addEventListener('click', function (event) {
+    const element = event.target
+    if (element.hasAttribute('data-job')) {
+      const elementJob = element.dataset.job
+      if (elementJob === 'complete') {
+        completeIconClicked(element)
+      } else if (elementJob === 'delete') {
+        deleteIconClicked(element)
+      } else if (elementJob === 'update') {
+        updateBtnClicked(element.id)
       }
-      saveData();
+      saveData()
     }
-    return;
-  });
-};
+  })
+}
 
 const bindEnterListener = () => {
-  const enterKeyCode = 13;
-  document.addEventListener("keyup", (event) => {
+  const enterKeyCode = 13
+  document.addEventListener('keyup', (event) => {
     if (event.keyCode === enterKeyCode) {
-      const inputText = input.value;
+      const inputText = document.getElementById('input').value
       if (inputText) {
-        //Adds the new ToDo with a set of default values
-        addNewToDo(inputText, "", Date.now(), "normal", false);
-        saveData();
+        // Adds the new ToDo with a set of default values
+        addNewToDo(inputText, '', Date.now(), 'normal', false)
+        saveData()
       }
-      input.value = "";
-    } else {
-      return;
+      document.getElementById('input').value = ''
     }
-  });
-};
+  })
+}
 
 const bindIconListener = () => {
-  document.getElementById("enter-icon").addEventListener("click", () => {
-    const inputText = input.value;
+  document.getElementById('enter-icon').addEventListener('click', () => {
+    const inputText = document.getElementById('input').value
     if (inputText) {
-      //Adds the new ToDo with a set of default values
-      addNewToDo(inputText, "", Date.now(), "normal", false);
-      saveData();
-      input.value = "";
-    } else {
-      return;
+      // Adds the new ToDo with a set of default values
+      addNewToDo(inputText, '', Date.now(), 'normal', false)
+      saveData()
+      document.getElementById('input').value = ''
     }
-  });
-};
+  })
+}
 
-export { bindEventListeners };
+export { bindEventListeners }
